@@ -1,13 +1,22 @@
 import express from "express"
 import path from "path"
+import { clerkMiddleware } from '@clerk/express'
+
 import { ENV } from "./config/env.js"
+import { connectDB } from "./config/db.js";
 
 const app = express()
+
+// Active le middleware Clerk pour gérer automatiquement l’authentification des utilisateurs (sessions, tokens, sécurité) sur toutes les requêtes
+app.use(clerkMiddleware())
+
+
 
 const __dirname = path.resolve();
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json())
+
 
 app.get("/api",(req,res) =>{
     res.send("Hello World")
@@ -22,6 +31,11 @@ if (ENV.NODE_ENV === "production") {
   });
 }
 
-app.listen(ENV.PORT, () => {
-    console.log(`Server is running on port http://localhost:${ENV.PORT}`)
-})
+const startServer = async () => {
+  await connectDB();
+  app.listen(ENV.PORT, () => {
+    console.log(`Server listening on port http://localhost:${ENV.PORT}`);
+  });
+};
+
+startServer();
