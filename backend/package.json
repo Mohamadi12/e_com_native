@@ -18,6 +18,7 @@
     "dotenv": "^17.2.3",
     "e_com_native": "file:..",
     "express": "^5.2.1",
+    "inngest": "^3.51.0",
     "mongodb": "^7.1.0",
     "mongoose": "^9.1.6",
     "nodemon": "^3.1.11"
