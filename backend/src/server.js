@@ -3,6 +3,7 @@ import path from "path";
 import { clerkMiddleware } from "@clerk/express";
 import { serve } from "inngest/express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import { functions, inngest } from "./config/inngest.js";
 
@@ -10,6 +11,8 @@ import { ENV } from "./config/env.js";
 import { connectDB } from "./config/db.js";
 
 const app = express();
+app.use(express.json({ limit: "10mb" })); // allows you to parse the body of the request
+app.use(cookieParser());
 
 // Active le middleware Clerk pour gérer automatiquement l’authentification des utilisateurs (sessions, tokens, sécurité) sur toutes les requêtes
 app.use(clerkMiddleware());
