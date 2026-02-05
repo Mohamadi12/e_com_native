@@ -31,12 +31,14 @@ const productSchema = new mongoose.Schema(
         required: true,
       },
     ],
+    //0 ⭐ et 5 ⭐
     averageRating: {
       type: Number,
       min: 0,
       max: 5,
       default: 0,
     },
+    //Nombre de commentaires
     totalReviews: {
       type: Number,
       default: 0,
