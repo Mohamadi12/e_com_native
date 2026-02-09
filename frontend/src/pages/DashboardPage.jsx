@@ -25,24 +25,24 @@ const DashboardPage = () => {
 
   const statsCards = [
     {
-      name: "Total Revenue",
+      name: "Revenu total",
       value: statsLoading
         ? "..."
         : `$${statsData?.totalRevenue?.toFixed(2) || 0}`,
       icon: <DollarSignIcon className="size-8" />,
     },
     {
-      name: "Total Orders",
+      name: "Commandes totales",
       value: statsLoading ? "..." : statsData?.totalOrders || 0,
       icon: <ShoppingBagIcon className="size-8" />,
     },
     {
-      name: "Total Customers",
+      name: "Clients totaux",
       value: statsLoading ? "..." : statsData?.totalCustomers || 0,
       icon: <UsersIcon className="size-8" />,
     },
     {
-      name: "Total Products",
+      name: "Produits totaux",
       value: statsLoading ? "..." : statsData?.totalProducts || 0,
       icon: <PackageIcon className="size-8" />,
     },
@@ -50,7 +50,7 @@ const DashboardPage = () => {
 
   return (
     <div className="space-y-6">
-      {/* STATS */}
+      {/* STATISTIQUES */}
       <div className="stats stats-vertical lg:stats-horizontal shadow w-full bg-base-100">
         {statsCards.map((stat) => (
           <div key={stat.name} className="stat">
@@ -60,10 +60,11 @@ const DashboardPage = () => {
           </div>
         ))}
       </div>
-      {/* RECENT ORDERS */}
+
+      {/* COMMANDES RÉCENTES */}
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="card-title">Recent Orders</h2>
+          <h2 className="card-title">Commandes récentes</h2>
 
           {ordersLoading ? (
             <div className="flex justify-center py-8">
@@ -71,7 +72,7 @@ const DashboardPage = () => {
             </div>
           ) : recentOrders.length === 0 ? (
             <div className="text-center py-8 text-base-content/60">
-              No orders yet
+              Aucune commande pour le moment
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -90,19 +91,20 @@ const DashboardPage = () => {
                 <tbody>
                   {recentOrders.map((order) => (
                     <tr key={order._id}>
+                      {/* ID */}
                       <td>
                         <span className="font-medium">
                           #{order._id.slice(-8).toUpperCase()}
                         </span>
                       </td>
-
+                      {/* CLIENT */}
                       <td>
                         <div>
                           <div className="font-medium">
                             {order.shippingAddress.fullName}
                           </div>
                           <div className="text-sm opacity-60">
-                            {order.orderItems.length} item(s)
+                            {order.orderItems.length} article(s)
                           </div>
                         </div>
                       </td>
@@ -115,12 +117,14 @@ const DashboardPage = () => {
                         </div>
                       </td>
 
+                      {/* MONTANT */}
                       <td>
                         <span className="font-semibold">
                           ${order.totalPrice.toFixed(2)}
                         </span>
                       </td>
 
+                      {/* STATUT */}
                       <td>
                         <div
                           className={`badge ${getOrderStatusBadge(order.status)}`}
@@ -129,6 +133,7 @@ const DashboardPage = () => {
                         </div>
                       </td>
 
+                      {/* DATE */}
                       <td>
                         <span className="text-sm opacity-60">
                           {formatDate(order.createdAt)}

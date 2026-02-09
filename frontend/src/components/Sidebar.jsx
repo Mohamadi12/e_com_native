@@ -16,17 +16,19 @@ const Sidebar = () => {
       ></label>
 
       <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
+        {/* LOGO */}
         <div className="p-4 w-full">
           <div className="flex items-center gap-3">
             <div className="size-10 bg-primary rounded-xl flex items-center justify-center shrink-0">
               <ShoppingBagIcon className="w-6 h-6 text-primary-content" />
             </div>
             <span className="text-xl font-bold is-drawer-close:hidden">
-              Admin
+              Administration
             </span>
           </div>
         </div>
 
+        {/* MENU */}
         <ul className="menu w-full grow flex flex-col gap-2">
           {NAVIGATION.map((item) => {
             const isActive = location.pathname === item.path;
@@ -46,6 +48,7 @@ const Sidebar = () => {
           })}
         </ul>
 
+        {/* PROFIL */}
         <div className="p-4 w-full">
           <div className="flex items-center gap-3">
             <div className="avatar shrink-0">
